@@ -1,7 +1,7 @@
 package com.goovy.util;
 
-import com.mall4j.cloud.common.database.dto.PageDTO;
 
+import com.goovy.dto.PageDTO;
 
 /**
  * 分页适配

@@ -3,8 +3,9 @@ package com.goovy.util;
 import com.github.pagehelper.ISelect;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageSerializable;
-import com.mall4j.cloud.common.database.dto.PageDTO;
-import com.mall4j.cloud.common.database.vo.PageVO;
+import com.goovy.dto.PageDTO;
+import com.goovy.vo.PageVO;
+
 
 /**
  * @author FrozenWatermelon

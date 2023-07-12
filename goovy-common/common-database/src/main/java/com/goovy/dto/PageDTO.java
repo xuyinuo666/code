@@ -1,8 +1,9 @@
 package com.goovy.dto;
 
 import com.github.pagehelper.IPage;
-import com.mall4j.cloud.common.util.PrincipalUtil;
+
 import io.swagger.v3.oas.annotations.media.Schema;
+import util.PrincipalUtil;
 
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;

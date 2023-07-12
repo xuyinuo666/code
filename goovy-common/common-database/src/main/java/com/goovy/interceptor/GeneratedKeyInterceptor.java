@@ -1,11 +1,7 @@
 package com.goovy.interceptor;
-
-import com.mall4j.cloud.api.leaf.feign.SegmentFeignClient;
-import com.mall4j.cloud.common.database.annotations.DistributedId;
-import com.mall4j.cloud.common.exception.Mall4cloudException;
-import com.mall4j.cloud.common.model.BaseModel;
-import com.mall4j.cloud.common.response.ResponseEnum;
-import com.mall4j.cloud.common.response.ServerResponseEntity;
+import com.goovy.annotations.DistributedId;
+import exception.GoovyException;
+import model.BaseModel;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
@@ -14,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import response.ResponseEnum;
+import response.ServerResponseEntity;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -54,8 +52,8 @@ public class GeneratedKeyInterceptor implements Interceptor {
      */
     private static final String BATCH_SAVE = "saveBatch";
 
-    @Autowired
-    private SegmentFeignClient segmentFeignClient;
+//    @Autowired
+//    private SegmentFeignClient segmentFeignClient;
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -138,14 +136,16 @@ public class GeneratedKeyInterceptor implements Interceptor {
             if (field.get(parameter) != null) {
                 break;
             }
-            ServerResponseEntity<Long> segmentIdResponseEntity = segmentFeignClient.getSegmentId(annotation.value());
-            if (segmentIdResponseEntity.isSuccess()) {
-                // 这里设置分布式id
-                field.set(parameter,segmentIdResponseEntity.getData());
-            } else {
-                logger.error("can't get distributed id !!!! ");
-                throw new Mall4cloudException(ResponseEnum.EXCEPTION);
-            }
+            // todo 分布式id
+//            ServerResponseEntity<Long> segmentIdResponseEntity = segmentFeignClient.getSegmentId(annotation.value());
+//            if (segmentIdResponseEntity.isSuccess()) {
+//                // 这里设置分布式id
+//                field.set(parameter,segmentIdResponseEntity.getData());
+//            } else {
+//                logger.error("can't get distributed id !!!! ");
+//
+//                throw new GoovyException(ResponseEnum.EXCEPTION);
+//            }
         }
     }
 

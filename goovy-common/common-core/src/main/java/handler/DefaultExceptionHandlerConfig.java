@@ -69,8 +69,8 @@ public class DefaultExceptionHandlerConfig {
 	}
 
 	@ExceptionHandler(GoovyException.class)
-	public ResponseEntity<ServerResponseEntity<Object>> mall4cloudExceptionHandler(GoovyException e) {
-		logger.error("mall4cloudExceptionHandler", e);
+	public ResponseEntity<ServerResponseEntity<Object>> GoovyExceptionHandler(GoovyException e) {
+		logger.error("GoovyExceptionHandler", e);
 
 		ResponseEnum responseEnum = e.getResponseEnum();
 		// 失败返回失败消息 + 状态码

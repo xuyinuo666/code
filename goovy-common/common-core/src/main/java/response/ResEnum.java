@@ -4,7 +4,7 @@ package response;
  * @author xgw
  * @date 2020/7/9
  */
-public enum ResponseEnum {
+public enum ResEnum {
 
 	/**
 	 * ok
@@ -152,7 +152,7 @@ public enum ResponseEnum {
 		return msg;
 	}
 
-	ResponseEnum(String code, String msg) {
+	ResEnum(String code, String msg) {
 		this.code = code;
 		this.msg = msg;
 	}

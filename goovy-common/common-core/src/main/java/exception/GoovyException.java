@@ -1,7 +1,7 @@
 package exception;
 
 
-import response.ResponseEnum;
+import response.ResEnum;
 
 /**
  * @author xgw
@@ -13,7 +13,7 @@ public class GoovyException extends RuntimeException {
 
 	private Object object;
 
-	private ResponseEnum responseEnum;
+	private ResEnum resEnum;
 
 	public GoovyException(String msg) {
 		super(msg);
@@ -29,14 +29,14 @@ public class GoovyException extends RuntimeException {
 	}
 
 
-	public GoovyException(ResponseEnum responseEnum) {
-		super(responseEnum.getMsg());
-		this.responseEnum = responseEnum;
+	public GoovyException(ResEnum resEnum) {
+		super(resEnum.getMsg());
+		this.resEnum = resEnum;
 	}
 
-	public GoovyException(ResponseEnum responseEnum, Object object) {
-		super(responseEnum.getMsg());
-		this.responseEnum = responseEnum;
+	public GoovyException(ResEnum resEnum, Object object) {
+		super(resEnum.getMsg());
+		this.resEnum = resEnum;
 		this.object = object;
 	}
 
@@ -45,8 +45,8 @@ public class GoovyException extends RuntimeException {
 		return object;
 	}
 
-	public ResponseEnum getResponseEnum() {
-		return responseEnum;
+	public ResEnum getResponseEnum() {
+		return resEnum;
 	}
 
 }

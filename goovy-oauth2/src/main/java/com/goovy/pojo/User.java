@@ -5,9 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import model.BaseModel;
-
-import java.io.Serializable;
+import pojo.BaseModel;
 
 /**
  * <p>

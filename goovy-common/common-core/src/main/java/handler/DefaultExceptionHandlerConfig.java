@@ -7,8 +7,7 @@ import exception.GoovyException;
 import io.seata.core.context.RootContext;
 import io.seata.core.exception.TransactionException;
 import io.seata.tm.api.GlobalTransactionContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -19,8 +18,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import response.ResponseEnum;
-import response.ServerResponseEntity;
+import response.ResEnum;
+import response.Res;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +32,13 @@ import java.util.List;
  */
 @RestController
 @RestControllerAdvice
+@Slf4j
 public class DefaultExceptionHandlerConfig {
 
-	private static final Logger logger = LoggerFactory.getLogger(DefaultExceptionHandlerConfig.class);
-
+	
 	@ExceptionHandler({ MethodArgumentNotValidException.class, BindException.class })
-	public ResponseEntity<ServerResponseEntity<List<String>>> methodArgumentNotValidExceptionHandler(Exception e) {
-		logger.error("methodArgumentNotValidExceptionHandler", e);
+	public ResponseEntity<Res<List<String>>> methodArgumentNotValidExceptionHandler(Exception e) {
+		log.error("methodArgumentNotValidExceptionHandler", e);
 		List<FieldError> fieldErrors = null;
 		if (e instanceof MethodArgumentNotValidException) {
 			fieldErrors = ((MethodArgumentNotValidException) e).getBindingResult().getFieldErrors();
@@ -49,7 +48,7 @@ public class DefaultExceptionHandlerConfig {
 		}
 		if (fieldErrors == null) {
 			return ResponseEntity.status(HttpStatus.OK)
-					.body(ServerResponseEntity.fail(ResponseEnum.METHOD_ARGUMENT_NOT_VALID));
+					.body(Res.fail(ResEnum.METHOD_ARGUMENT_NOT_VALID));
 		}
 
 		List<String> defaultMessages = new ArrayList<>(fieldErrors.size());
@@ -57,37 +56,37 @@ public class DefaultExceptionHandlerConfig {
 			defaultMessages.add(fieldError.getField() + ":" + fieldError.getDefaultMessage());
 		}
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(ServerResponseEntity.fail(ResponseEnum.METHOD_ARGUMENT_NOT_VALID, defaultMessages));
+				.body(Res.fail(ResEnum.METHOD_ARGUMENT_NOT_VALID, defaultMessages));
 	}
 
 	@ExceptionHandler({ HttpMessageNotReadableException.class })
-	public ResponseEntity<ServerResponseEntity<List<FieldError>>> methodArgumentNotValidExceptionHandler(
+	public ResponseEntity<Res<List<FieldError>>> methodArgumentNotValidExceptionHandler(
 			HttpMessageNotReadableException e) {
-		logger.error("methodArgumentNotValidExceptionHandler", e);
+		log.error("methodArgumentNotValidExceptionHandler", e);
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(ServerResponseEntity.fail(ResponseEnum.HTTP_MESSAGE_NOT_READABLE));
+				.body(Res.fail(ResEnum.HTTP_MESSAGE_NOT_READABLE));
 	}
 
 	@ExceptionHandler(GoovyException.class)
-	public ResponseEntity<ServerResponseEntity<Object>> GoovyExceptionHandler(GoovyException e) {
-		logger.error("GoovyExceptionHandler", e);
+	public ResponseEntity<Res<Object>> GoovyExceptionHandler(GoovyException e) {
+		log.error("GoovyExceptionHandler", e);
 
-		ResponseEnum responseEnum = e.getResponseEnum();
+		ResEnum resEnum = e.getResponseEnum();
 		// 失败返回失败消息 + 状态码
-		if (responseEnum != null) {
-			return ResponseEntity.status(HttpStatus.OK).body(ServerResponseEntity.fail(responseEnum, e.getObject()));
+		if (resEnum != null) {
+			return ResponseEntity.status(HttpStatus.OK).body(Res.fail(resEnum, e.getObject()));
 		}
 		// 失败返回消息 状态码固定为直接显示消息的状态码
-		return ResponseEntity.status(HttpStatus.OK).body(ServerResponseEntity.showFailMsg(e.getMessage()));
+		return ResponseEntity.status(HttpStatus.OK).body(Res.showFailMsg(e.getMessage()));
 	}
 
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ServerResponseEntity<Object>> exceptionHandler(Exception e) throws TransactionException {
-		logger.error("exceptionHandler", e);
-		logger.info("RootContext.getXID(): " + RootContext.getXID());
+	public ResponseEntity<Res<Object>> exceptionHandler(Exception e) throws TransactionException {
+		log.error("exceptionHandler", e);
+		log.info("RootContext.getXID(): " + RootContext.getXID());
 		if (StrUtil.isNotBlank(RootContext.getXID())) {
 			GlobalTransactionContext.reload(RootContext.getXID()).rollback();
 		}
-		return ResponseEntity.status(HttpStatus.OK).body(ServerResponseEntity.fail(ResponseEnum.EXCEPTION));
+		return ResponseEntity.status(HttpStatus.OK).body(Res.fail(ResEnum.EXCEPTION));
 	}
 }

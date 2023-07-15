@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import response.ServerResponseEntity;
+import response.Res;
 import xss.XssUtil;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,8 +30,8 @@ public class HttpHandler {
 	@Autowired
 	private ObjectMapper objectMapper;
 
-	public <T> void printServerResponseToWeb(ServerResponseEntity<T> serverResponseEntity) {
-		if (serverResponseEntity == null) {
+	public <T> void printServerResponseToWeb(Res<T> res) {
+		if (res == null) {
 			logger.info("print obj is null");
 			return;
 		}
@@ -47,13 +47,13 @@ public class HttpHandler {
 			logger.error("httpServletResponse is null, can not print to web");
 			return;
 		}
-		logger.error("response error: " + serverResponseEntity.getMsg());
+		logger.error("response error: " + res.getMsg());
 		response.setCharacterEncoding(CharsetUtil.UTF_8);
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 		PrintWriter printWriter = null;
 		try {
 			printWriter = response.getWriter();
-			printWriter.write(XssUtil.clean(objectMapper.writeValueAsString(serverResponseEntity)));
+			printWriter.write(XssUtil.clean(objectMapper.writeValueAsString(res)));
 		}
 		catch (IOException e) {
 			throw new GoovyException("io 异常", e);

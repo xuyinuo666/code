@@ -1,17 +1,13 @@
 package com.goovy.interceptor;
 import com.goovy.annotations.DistributedId;
-import exception.GoovyException;
-import model.BaseModel;
+import pojo.BaseModel;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import response.ResponseEnum;
-import response.ServerResponseEntity;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

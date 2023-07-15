@@ -14,6 +14,7 @@
         <module>goovy-common/common-database</module>
         <module>goovy-oauth2</module>
         <module>goovy-gateway</module>
+        <module>goovy-user</module>
     </modules>
 
     <properties>

@@ -22,8 +22,10 @@ spring:
         password: ${spring.cloud.nacos.discovery.password}
   profiles:
     active: @profiles.active@
-    
-    
+gateway:
+  white-list:
+    - "/api/oauth/login"              # 健康检查
+    - "/test/**"                # 获取用户信息
     
     
     

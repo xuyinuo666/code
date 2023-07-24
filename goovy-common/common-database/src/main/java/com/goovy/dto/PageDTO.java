@@ -3,7 +3,7 @@ package com.goovy.dto;
 import com.github.pagehelper.IPage;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import util.PrincipalUtil;
+import com.goovy.util.PrincipalUtil;
 
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;

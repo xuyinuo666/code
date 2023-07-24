@@ -1,10 +1,12 @@
 package com.goovy.config;
 
+import com.goovy.constant.RedisCacheConstant;
 import org.checkerframework.checker.index.qual.PolyUpperBound;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -17,6 +19,7 @@ import org.springframework.security.oauth2.provider.client.JdbcClientDetailsServ
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -26,7 +29,8 @@ import javax.sql.DataSource;
 public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
     @Resource
     private DataSource dataSource;
-
+    @Resource
+    private RedisConnectionFactory redisConnectionFactory;
     @Resource
     private AuthenticationManager authenticationManager;
     @Resource(name = "myUserDetailService")
@@ -34,7 +38,9 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Bean
     public TokenStore tokenStore() {
-        return new JdbcTokenStore(dataSource);
+        RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
+        redisTokenStore.setPrefix(RedisCacheConstant.USER_TOKEN);
+        return redisTokenStore;
     }
 
     @Bean

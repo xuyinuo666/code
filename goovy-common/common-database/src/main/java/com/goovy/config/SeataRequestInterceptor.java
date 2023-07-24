@@ -2,7 +2,7 @@ package com.goovy.config;
 
 import cn.hutool.core.util.StrUtil;
 
-import constant.Auth;
+import com.goovy.constant.Auth;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import io.seata.core.context.RootContext;
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
  * @author FrozenWatermelon
  * @date 2020/11/27
  */
-@Component
-@ConditionalOnClass({RequestInterceptor.class, GlobalTransactional.class})
+//@Component
+//@ConditionalOnClass({RequestInterceptor.class, GlobalTransactional.class})
 public class SeataRequestInterceptor implements RequestInterceptor {
 
     private static final Logger logger = LoggerFactory.getLogger(SeataRequestInterceptor.class);

@@ -1,6 +1,6 @@
 package com.goovy.oauth2.dto;
 
-import dto.BaseDTO;
+import com.goovy.dto.BaseDTO;
 import lombok.Data;
 
 @Data

@@ -1,6 +1,6 @@
 package com.goovy.interceptor;
 import com.goovy.annotations.DistributedId;
-import pojo.BaseModel;
+import com.goovy.pojo.BaseModel;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
@@ -23,8 +23,8 @@ import java.util.Map;
  * @author FrozenWatermelon
  * @date 2020/9/9
  */
-@Component
-@Intercepts({@Signature(type = Executor.class, method = "update", args = {MappedStatement.class,Object.class})})
+//@Component
+//@Intercepts({@Signature(type = Executor.class, method = "update", args = {MappedStatement.class,Object.class})})
 public class GeneratedKeyInterceptor implements Interceptor {
 
     private static final Logger logger = LoggerFactory.getLogger(GeneratedKeyInterceptor.class);

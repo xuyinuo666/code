@@ -15,6 +15,7 @@
         <module>goovy-oauth2</module>
         <module>goovy-gateway</module>
         <module>goovy-user</module>
+        <module>goovy-product</module>
     </modules>
 
     <properties>

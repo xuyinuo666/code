@@ -11,5 +11,6 @@
     <modules>
         <module>api-oauth2</module>
         <module>api-user</module>
+        <module>api-product</module>
     </modules>
 </project>

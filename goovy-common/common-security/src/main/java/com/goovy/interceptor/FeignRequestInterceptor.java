@@ -4,9 +4,6 @@ import com.goovy.bo.RequestUserBO;
 import com.goovy.utils.UserContextUtils;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-import io.seata.spring.annotation.GlobalTransactional;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;

@@ -1,5 +1,6 @@
 package com.goovy.controller;
 
+import com.goovy.utils.RedisUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,9 +17,17 @@ import javax.annotation.Resource;
 public class TestController {
     @Resource
     private PasswordEncoder passwordEncoder;
+    @Resource
+    private RedisUtil redisUtil;
     @RequestMapping("/encode")
     @Operation(summary = "加密密码" , description = "加密密码")
     public Res<String> encodePasswd(@RequestParam String passwd){
         return Res.success(passwordEncoder.encode(passwd));
+    }
+
+    @RequestMapping("/redisToken")
+    public Res<String> redisToken(){
+        System.out.println(redisUtil.get("user::token:access:EEtC9Eg_Id--M6telgaH1dgr8Io"));
+        return Res.success();
     }
 }

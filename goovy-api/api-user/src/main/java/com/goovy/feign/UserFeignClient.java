@@ -10,4 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface UserFeignClient {
     @GetMapping("/api/user/getUser")
     Res<JSONObject> checkToken(@RequestBody String token);
+
+    @GetMapping("/api/user/getUserPermission")
+    Res<JSONObject> getUserPermission(@RequestBody String token);
 }

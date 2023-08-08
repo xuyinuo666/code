@@ -1,5 +1,7 @@
 package com.goovy.config;
 
+import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
+import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -16,6 +18,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
@@ -63,7 +66,7 @@ public class RedisCacheConfig {
     private RedisCacheConfiguration getRedisCacheConfigurationWithTtl(Integer seconds) {
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig();
         redisCacheConfiguration = redisCacheConfiguration
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer()))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(fastJsonRedisSerializer()))
                 .entryTtl(Duration.ofSeconds(seconds));
 
         return redisCacheConfiguration;
@@ -73,28 +76,32 @@ public class RedisCacheConfig {
      * 自定义redis序列化的机制,重新定义一个ObjectMapper.防止和MVC的冲突
      * https://juejin.im/post/5e869d426fb9a03c6148c97e
      */
+//    @Bean
+//    public RedisSerializer<Object> redisSerializer() {
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        // 反序列化时候遇到不匹配的属性并不抛出异常
+//        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//        // 序列化时候遇到空对象不抛出异常
+//        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+//        // 反序列化的时候如果是无效子类型,不抛出异常
+//        objectMapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
+//        // 不使用默认的dateTime进行序列化,
+//        objectMapper.configure(SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS, false);
+//        // 使用JSR310提供的序列化类,里面包含了大量的JDK8时间序列化类
+//        objectMapper.registerModule(new JavaTimeModule());
+//        // 启用反序列化所需的类型信息,在属性中添加@class
+//        objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL,
+//                JsonTypeInfo.As.PROPERTY);
+//        // 配置null值的序列化器
+//        GenericJackson2JsonRedisSerializer.registerNullValueSerializer(objectMapper, null);
+//        return new GenericJackson2JsonRedisSerializer(objectMapper);
+//    }
     @Bean
-    public RedisSerializer<Object> redisSerializer() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        // 反序列化时候遇到不匹配的属性并不抛出异常
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        // 序列化时候遇到空对象不抛出异常
-        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        // 反序列化的时候如果是无效子类型,不抛出异常
-        objectMapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
-        // 不使用默认的dateTime进行序列化,
-        objectMapper.configure(SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS, false);
-        // 使用JSR310提供的序列化类,里面包含了大量的JDK8时间序列化类
-        objectMapper.registerModule(new JavaTimeModule());
-        // 启用反序列化所需的类型信息,在属性中添加@class
-        objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL,
-                JsonTypeInfo.As.PROPERTY);
-        // 配置null值的序列化器
-        GenericJackson2JsonRedisSerializer.registerNullValueSerializer(objectMapper, null);
-        return new GenericJackson2JsonRedisSerializer(objectMapper);
+    public RedisSerializer<Object> fastJsonRedisSerializer() {
+        return new GenericFastJsonRedisSerializer();
     }
 
-    @Bean
+    @Bean(name = "redisTemplate")
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory,
                                                        RedisSerializer<Object> redisSerializer) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();

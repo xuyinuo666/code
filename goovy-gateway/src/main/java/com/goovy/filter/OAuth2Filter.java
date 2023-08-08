@@ -3,6 +3,7 @@ package com.goovy.filter;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.goovy.config.WhiteAndBlackProperties;
+import com.goovy.exception.GoovyException;
 import com.goovy.response.Res;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -42,8 +43,8 @@ public class OAuth2Filter implements GlobalFilter {
         String token = headers.getFirst("Authorization");
         if (!StrUtil.isBlank(token)) {
             return chain.filter(exchange);
+        }else {
+            throw new GoovyException("token is empty!");
         }
-        response.setStatusCode(HttpStatus.UNAUTHORIZED);
-        return response.setComplete();
     }
 }

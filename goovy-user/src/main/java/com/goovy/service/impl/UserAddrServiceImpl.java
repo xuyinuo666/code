@@ -1,6 +1,6 @@
 package com.goovy.service.impl;
 
-import com.goovy.pojo.UserAddr;
+import com.goovy.entity.UserAddr;
 import com.goovy.mapper.UserAddrMapper;
 import com.goovy.service.IUserAddrService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

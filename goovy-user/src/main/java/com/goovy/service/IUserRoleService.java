@@ -1,6 +1,6 @@
 package com.goovy.service;
 
-import com.goovy.pojo.UserRole;
+import com.goovy.entity.UserRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

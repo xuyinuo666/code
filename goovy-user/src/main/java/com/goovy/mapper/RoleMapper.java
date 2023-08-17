@@ -1,6 +1,6 @@
 package com.goovy.mapper;
 
-import com.goovy.pojo.Role;
+import com.goovy.entity.Role;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

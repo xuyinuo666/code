@@ -1,6 +1,6 @@
 package com.goovy.service.impl;
 
-import com.goovy.pojo.User;
+import com.goovy.entity.User;
 import com.goovy.mapper.UserMapper;
 import com.goovy.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

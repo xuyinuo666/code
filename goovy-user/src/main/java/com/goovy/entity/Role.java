@@ -1,4 +1,4 @@
-package com.goovy.pojo;
+package com.goovy.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 角色与菜单对应关系
+ * 角色
  * </p>
  *
  * @author y1nuo
@@ -22,16 +22,16 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("role_menu")
-public class RoleMenu implements Serializable {
+@TableName("role")
+public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 关联id
+     * 角色id
      */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "role_id", type = IdType.AUTO)
+    private Long roleId;
 
     /**
      * 创建时间
@@ -46,19 +46,29 @@ public class RoleMenu implements Serializable {
     private LocalDateTime updateTime;
 
     /**
-     * 角色ID
+     * 角色名称
      */
-    private Long roleId;
+    private String roleName;
 
     /**
-     * 菜单ID
+     * 备注
      */
-    private Long menuId;
+    private String remark;
 
     /**
-     * 菜单资源用户id
+     * 创建者ID
      */
-    private Long menuPermissionId;
+    private Long createUserId;
+
+    /**
+     * 业务类型 1 店铺菜单 2平台菜单
+     */
+    private Integer bizType;
+
+    /**
+     * 所属租户
+     */
+    private Long tenantId;
 
 
 }

@@ -1,6 +1,6 @@
 package com.goovy.mapper;
 
-import com.goovy.pojo.MenuPermission;
+import com.goovy.entity.MenuPermission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

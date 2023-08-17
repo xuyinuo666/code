@@ -1,5 +1,5 @@
 package com.goovy.mapper;
-import com.goovy.pojo.User;
+import com.goovy.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

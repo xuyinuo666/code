@@ -1,6 +1,6 @@
 package com.goovy.service.impl;
 
-import com.goovy.pojo.Role;
+import com.goovy.entity.Role;
 import com.goovy.mapper.RoleMapper;
 import com.goovy.service.IRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

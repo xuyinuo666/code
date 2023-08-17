@@ -1,6 +1,6 @@
 package com.goovy.mapper;
 
-import com.goovy.pojo.Area;
+import com.goovy.entity.Area;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

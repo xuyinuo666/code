@@ -1,4 +1,4 @@
-package com.goovy.pojo;
+package com.goovy.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 角色
+ * 菜单资源
  * </p>
  *
  * @author y1nuo
@@ -22,16 +22,16 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("role")
-public class Role implements Serializable {
+@TableName("menu_permission")
+public class MenuPermission implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 角色id
+     * 菜单资源用户id
      */
-    @TableId(value = "role_id", type = IdType.AUTO)
-    private Long roleId;
+    @TableId(value = "menu_permission_id", type = IdType.AUTO)
+    private Long menuPermissionId;
 
     /**
      * 创建时间
@@ -46,19 +46,9 @@ public class Role implements Serializable {
     private LocalDateTime updateTime;
 
     /**
-     * 角色名称
+     * 资源关联菜单
      */
-    private String roleName;
-
-    /**
-     * 备注
-     */
-    private String remark;
-
-    /**
-     * 创建者ID
-     */
-    private Long createUserId;
+    private Long menuId;
 
     /**
      * 业务类型 1 店铺菜单 2平台菜单
@@ -66,9 +56,24 @@ public class Role implements Serializable {
     private Integer bizType;
 
     /**
-     * 所属租户
+     * 权限对应的编码
      */
-    private Long tenantId;
+    private String permission;
+
+    /**
+     * 资源名称
+     */
+    private String name;
+
+    /**
+     * 资源对应服务器路径
+     */
+    private String uri;
+
+    /**
+     * 请求方法 1.GET 2.POST 3.PUT 4.DELETE
+     */
+    private Integer method;
 
 
 }

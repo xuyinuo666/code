@@ -1,6 +1,6 @@
 package com.goovy.service;
 
-import com.goovy.pojo.MenuPermission;
+import com.goovy.entity.MenuPermission;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

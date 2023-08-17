@@ -1,6 +1,6 @@
 package com.goovy.service.impl;
 
-import com.goovy.pojo.Menu;
+import com.goovy.entity.Menu;
 import com.goovy.mapper.MenuMapper;
 import com.goovy.service.IMenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

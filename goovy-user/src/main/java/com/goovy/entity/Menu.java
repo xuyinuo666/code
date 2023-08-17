@@ -1,4 +1,4 @@
-package com.goovy.pojo;
+package com.goovy.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;

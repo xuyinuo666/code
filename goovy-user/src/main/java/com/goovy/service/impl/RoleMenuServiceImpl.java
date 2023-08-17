@@ -1,6 +1,6 @@
 package com.goovy.service.impl;
 
-import com.goovy.pojo.RoleMenu;
+import com.goovy.entity.RoleMenu;
 import com.goovy.mapper.RoleMenuMapper;
 import com.goovy.service.IRoleMenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

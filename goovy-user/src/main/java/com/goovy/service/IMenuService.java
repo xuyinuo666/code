@@ -1,6 +1,6 @@
 package com.goovy.service;
 
-import com.goovy.pojo.Menu;
+import com.goovy.entity.Menu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

@@ -1,7 +1,7 @@
 package com.goovy.service;
 
 import com.goovy.oauth2.dto.UserDTO;
-import com.goovy.pojo.User;
+import com.goovy.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

@@ -35,7 +35,6 @@ public class OAuth2Filter implements GlobalFilter {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         String path = request.getURI().getPath();
-        ServerHttpResponse response = exchange.getResponse();
         if (whiteAndBlackProperties.getWhiteList().contains(path)) {
             return chain.filter(exchange);
         }

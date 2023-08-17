@@ -1,6 +1,6 @@
 package com.goovy.service.impl;
 
-import com.goovy.pojo.UndoLog;
+import com.goovy.entity.UndoLog;
 import com.goovy.mapper.UndoLogMapper;
 import com.goovy.service.IUndoLogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

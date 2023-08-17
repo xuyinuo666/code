@@ -1,4 +1,4 @@
-package com.goovy.pojo;
+package com.goovy.entity;
 
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;

@@ -1,6 +1,6 @@
 package com.goovy.service.impl;
 
-import com.goovy.pojo.Area;
+import com.goovy.entity.Area;
 import com.goovy.mapper.AreaMapper;
 import com.goovy.service.IAreaService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

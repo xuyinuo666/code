@@ -2,11 +2,10 @@ package com.goovy.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.goovy.oauth2.dto.UserDTO;
-import com.goovy.pojo.User;
+import com.goovy.entity.User;
 import com.goovy.mapper.UserMapper;
 import com.goovy.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import ma.glasnost.orika.MapperFacade;
 import org.springframework.stereotype.Service;
 
 /**

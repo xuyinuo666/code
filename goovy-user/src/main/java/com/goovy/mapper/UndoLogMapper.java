@@ -1,6 +1,6 @@
 package com.goovy.mapper;
 
-import com.goovy.pojo.UndoLog;
+import com.goovy.entity.UndoLog;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
